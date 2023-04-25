@@ -1,15 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
 import axios from 'axios';
-import { useCallback, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import { useCallback, useState } from 'react';
+import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa'
 
 import Input from '../components/Input';
 
 const Auth = () => {
-const router = useRouter();
 const [name, setName] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
@@ -26,15 +23,12 @@ const login = useCallback(async () => {
     await signIn('credentials', {
       email,
       password,
-      redirect: false,
-      callbackUrl: '/'
+      callbackUrl: '/profiles'
     });
-    
-    router.push('/');
   } catch (error) {
     console.log(error);
   }
-}, [email, password, router]);
+}, [email, password]);
 
 const register = useCallback(async () => {
   try{
@@ -52,9 +46,9 @@ const register = useCallback(async () => {
 
   return (
     <div className="relative h-full w-full bg-[url('/images/background.avif')] bg-no-repeat bg-center- bg-fixed bg-cover">
-      <div className='bg-black w-full h-full lg:bg-opacity-30'>
-        <nav className='absolute px-12 py-5'>
-          <img src="/images/logo.jpeg" alt="Logo" className='h-32'/>
+      <div className='bg-black w-full h-full lg:bg-opacity-20'>
+        <nav className='absolute px-16 py-12'>
+          <img src="/images/logo.jpeg" alt="Logo" className='h-16'/>
         </nav>
         <div className='flex justify-center'>
           <div className='bg-black bg-opacity-30 px-16 py-16 self-center mt-24 lg:w-2/5 lg:max-w-md rounded-md w-full'>
@@ -95,7 +89,7 @@ const register = useCallback(async () => {
                 <div className='flex flex-row items-center gap-4 mt-8 justify-center'>
                     
                     <div 
-                      onClick={() => signIn('google', { callbackUrl: '/' })}
+                      onClick={() => signIn('google', { callbackUrl: '/profiles' })}
                       className='
                         w-10
                         h-10
@@ -113,7 +107,7 @@ const register = useCallback(async () => {
                     </div>  
                     
                     <div 
-                      onClick={() => signIn('github', { callbackUrl: '/' })}
+                      onClick={() => signIn('github', { callbackUrl: '/profiles' })}
                       className='
                         w-10
                         h-10
