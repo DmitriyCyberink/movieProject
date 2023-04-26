@@ -1,7 +1,7 @@
 import { NextPageContext } from 'next';
 import { getSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import Billboard from '../components/Billboard';
+import { FilmsSection } from '../components/MovieList';
 
 import Navbar from '../components/Navbar';
 
@@ -11,6 +11,16 @@ interface Movies {
   i: any;
   id: number;
   l: string;
+}
+
+
+interface Actor {
+  id: number;
+  name: string;
+}
+
+interface ActorMovie {
+  film_name: string;
 }
 
 
@@ -33,6 +43,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
 export default function Home () {
   const [movies, setMovies] = useState<Movies[]>([]);
+  const [actorMovies, setActorMovies] = useState<ActorMovie[]>([]);
 
   useEffect (() => {
       fetch('https://online-movie-database.p.rapidapi.com/auto-complete?q=friends', {
@@ -56,28 +67,8 @@ export default function Home () {
         <div className='bg-black w-full h-full lg:bg-opacity-20'>
         <Navbar />
         {/* <Billboard />  */}
-        <div className='px-4 md:px-12 mt-4 space-y-8'>
-       
-         <div className='grid grid-cols-4 gap-2 pt-28'>
-          {movies.map(movie => (
-            <div className='mb-10' key={movie.id}>
-                <div className='cursor-pointer'>
-                    <p className='text-white text-md md:text-xl lg:text-2xl font-semibold mb-4'>
-                      {movie.l}
-                    </p>
-                <div className='relative group bg-zinc-900 col-span '>
-                    <img src={movie.i.imageUrl} alt="" />
-
-                      <div className='text-white bg-black/75 absolute inset-0  opacity-0 hover:opacity-100 px-2'>
-                      Actors: {movie.s}
-                      </div>
-              </div>
-             </div>
-            </div>
-          ))}
-          </div>
-        </div>
-
+        <FilmsSection />
+      
         </div>
      </div>
    
