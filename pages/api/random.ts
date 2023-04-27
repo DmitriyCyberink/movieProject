@@ -23,6 +23,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
     return response.status(200).json(randomMovies[0]);
   } catch (error) {
     console.error(error);
-    return response.status(400).end
+    // return response.status(400).end
   }
 }

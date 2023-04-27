@@ -48,6 +48,7 @@ const register = useCallback(async () => {
     <div className="relative h-full w-full bg-[url('/images/background.avif')] bg-no-repeat bg-center- bg-fixed bg-cover">
       <div className='bg-black w-full h-full lg:bg-opacity-20'>
         <nav className='absolute px-16 py-12'>
+          
           <img src="/images/logo.jpeg" alt="Logo" className='h-16'/>
         </nav>
         <div className='flex justify-center'>
