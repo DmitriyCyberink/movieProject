@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import MovieRating from './movieRating';
+// import MovieRating from './movieRating';
 
 import Navbar from './Navbar';
 
