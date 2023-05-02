@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Navbar from '../components/Nav/Navbar';
 // import MovieRating from './movieRating';
-
-import Navbar from './Navbar';
 
 interface Movie {
   id: number;
@@ -28,9 +27,10 @@ const getPosterPath = (posterPath: any) => {
   return `https://www.themoviedb.org/t/p/w440_and_h660_face${posterPath}`;
 };
 
+const apiKey: string = 'a6535dd01d5e04f8e26bbf2794f980f9'
 
-export const MoviePage = () => {
-  const [allMovies, setAllMovies] = useState<number>();
+const MovieDetails = () => {
+const [allMovies, setAllMovies] = useState<number>();
 
   const [movies, setMovies] = useState<Movie[]>([]);
   const [movieList, setMovieList] = useState<number[]>([]);
@@ -44,7 +44,7 @@ export const MoviePage = () => {
     const response = await axios.get("https://api.themoviedb.org/3/discover/movie",
       {
         params: {
-          api_key: "a6535dd01d5e04f8e26bbf2794f980f9",
+          api_key: apiKey,
           "primary_release_date.gte": "2000-01-01",
         },
       }
@@ -56,14 +56,15 @@ export const MoviePage = () => {
     setAllMovies(allMovies);
   };
   
-  const getAllMovies = async (pagesNr: number) => {
+  const getRandomPage = async (pagesNr: number) => {
+    const randomPage: number = Math.floor(Math.random() * 500) + 1;
 
     const request = await axios.get("https://api.themoviedb.org/3/discover/movie",
       {
         params: {
-          api_key: "a6535dd01d5e04f8e26bbf2794f980f9",
+          api_key: apiKey,
           "primary_release_date.gte": "2000-01-01",
-          page: 13,
+          page: randomPage,
         },
       }
     );
@@ -78,7 +79,7 @@ export const MoviePage = () => {
     const request = await axios.get(`https://api.themoviedb.org/3/movie/${id}`,
       {
         params: {
-          api_key: "a6535dd01d5e04f8e26bbf2794f980f9",
+          api_key: apiKey,
         },
       }
     );
@@ -90,7 +91,7 @@ export const MoviePage = () => {
     const request = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`,
       {
         params: {
-          api_key: "a6535dd01d5e04f8e26bbf2794f980f9",
+          api_key: apiKey,
         },
       }
     );
@@ -107,7 +108,7 @@ export const MoviePage = () => {
     const request = await axios.get(`https://api.themoviedb.org/3/person/${id}/movie_credits`,
       {
         params: {
-          api_key: "a6535dd01d5e04f8e26bbf2794f980f9",
+          api_key: apiKey,
         },
       }
     );
@@ -124,7 +125,7 @@ export const MoviePage = () => {
   }, []);
 
   useEffect(() => {
-    allMovies != undefined && getAllMovies(allMovies);
+    allMovies != undefined && getRandomPage(allMovies);
   }, [allMovies]);
 
   useEffect(() => {
@@ -268,3 +269,5 @@ export const MoviePage = () => {
       </div>
     </div>
 };
+
+export default MovieDetails;
