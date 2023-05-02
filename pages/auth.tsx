@@ -108,7 +108,7 @@ const register = useCallback(async () => {
                     </div>  
                     
                     <div 
-                      onClick={() => signIn('github', { callbackUrl: '/' })}
+                      onClick={() => signIn('github', { callbackUrl: '/profiles' })}
                       className='
                         w-10
                         h-10
