@@ -1,18 +1,8 @@
 import { NextPageContext } from 'next';
 import { getSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import { MoviePage } from '../components/Content/MoviePage';
 
 import Navbar from '../components/Nav/Navbar';
-
-interface Movies {
-  rank: string;
-  s: string;
-  i: any;
-  id: number;
-  l: string;
-}
-
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
